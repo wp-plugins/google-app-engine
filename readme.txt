@@ -2,8 +2,8 @@
 Contributors: google, sennza
 Tags: google, app engine, gae, mail, email, uploads, uploading, cloud storage
 Requires at least: 3.5
-Tested up to: 3.6
-Stable tag: 1.0
+Tested up to: 3.8
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,11 +77,20 @@ the cache, so if you want to use comments on a fully-cached site, we recommend
 
 == Changelog ==
 
+= 1.1 =
+* Fix uploads issue on the development server where PyCrypto is not available.
+* include 'max_bytes_per_blob' in createUploadUrl options only if wp_max_upload_size() is a positive int
+* Remove writable bucket check work around is this is now natively supported.
+
 = 1.0 =
 * Initial release
 
 
 == Upgrade Notice ==
+= 1.1 =
+* Fix uploads issue on the development server where PyCrypto is not available.
+* include 'max_bytes_per_blob' in createUploadUrl options only if wp_max_upload_size() is a positive int
+* Remove writable bucket check work around is this is now natively supported.
 
 = 1.0 =
 This version is the initial release of Google App Engine for WordPress.
