@@ -373,6 +373,9 @@ class Uploads {
 				update_post_meta( $id, '_appengine_imageurl_file', $file );
 			}
 			catch ( CloudStorageException $e ) {
+        syslog(LOG_ERR,
+            'There was an exception creating the Image Serving URL, details ' .
+            $e->getMessage());
 				self::$skip_image_filters = true;
 				$data = image_downsize( $id, $size );
 				self::$skip_image_filters = false;
@@ -603,11 +606,11 @@ class Admin {
 		}
 
     $bucket_name = 'gs://' . $input;
-    $valid_bucket_name = false;
+    $valid_bucket_name = true;
     // In the devappserver there is a chicken and egg problem with bucket
     // creation - so we need to special case this check for the time being.
     if ( self::is_production() ) {
-      if ( !file_exists( $bucket_name ) || ! is_writable( $bucket_name ) ) {
+      if (!file_exists( $bucket_name ) || !is_writable( $bucket_name ) ) {
         $valid_bucket_name = false;
       }
     } else {
